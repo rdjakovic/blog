@@ -45,4 +45,8 @@ public class PostService {
         postRepository.delete(id);
     }
 
+    public Long numberOfPostsPerAuthor(Long id) {
+        return postRepository.countByAuthorId(id);
+    }
+
 }

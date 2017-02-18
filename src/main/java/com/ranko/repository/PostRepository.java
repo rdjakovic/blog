@@ -16,4 +16,6 @@ public interface PostRepository extends CrudRepository<Post, Long> {
 
     List<Post> findAllByAuthorIdOrderByPostedOnDesc(Long id);
 
+    Long countByAuthorId(Long id);
+
 }

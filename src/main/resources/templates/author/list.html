@@ -17,6 +17,7 @@
             <th>Last Name</th>
             <th>Email</th>
             <th>Posts By Author</th>
+            <th>Number od posts</th>
         </tr>
         </thead>
         <tbody>
@@ -25,6 +26,7 @@
             <td th:text="${author.firstName}">First Name</td>
             <td th:text="${author.lastName}">Last Name</td>
             <td th:text="${author.email}">Email Address</td>
+            <td th:text="${author.numberOfPosts}" align="center">numberOfPosts</td>
             <td><a th:href="|/posts/byAuthor/${author.id}|">Posts By Author</a></td>
         </tr>
         </tbody>

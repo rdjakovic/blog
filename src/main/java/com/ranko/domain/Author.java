@@ -1,9 +1,6 @@
 package com.ranko.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -17,8 +14,16 @@ public class Author {
     private String lastName;
     private String email;
 
-//    @OneToMany(mappedBy = "author")
-//    List<Post> posts;
+    @Transient
+    private Integer numberOfPosts;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
+    private List<Post> posts;
+
+    @PostLoad
+    public void updateNumberOfPosts() {
+        this.numberOfPosts = this.posts.size();
+    }
 
     // no arg constructor is needed by JPA
     @SuppressWarnings("unused")
@@ -68,15 +73,13 @@ public class Author {
         this.email = email;
     }
 
-/*
+    public Integer getNumberOfPosts() {
+        return numberOfPosts;
+    }
+
     public List<Post> getPosts() {
         return posts;
     }
-
-    public void setPosts(List<Post> posts) {
-        this.posts = posts;
-    }
-*/
 
     @Override
     public String toString() {
