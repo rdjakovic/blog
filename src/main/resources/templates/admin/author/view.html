@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<layout:html lang="en"
+			 xmlns:th="http://www.thymeleaf.org"
+			 layout:decorator="layouts/main" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+	<title>View Authors</title>
+</head>
+<body>
+		
+	<div layout:fragment="content">
+	
+		<h2>View Author</h2>
+
+		<form class="form-horizontal">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">First name</label>
+				<div class="col-md-10">
+					<p class="form-control-static" th:text="${author.firstName}">title</p>
+				</div>
+			</div>
+			<div class="form-group">
+		    	<label class="col-sm-2 control-label">Last name</label>
+		    	<div class="col-md-10">
+		    		<p class="form-control-static" th:text="${author.lastName}">slug</p>
+		    	</div>
+		  	</div>
+			<div class="form-group">
+		    	<label class="col-sm-2 control-label">Email</label>
+		    	<div class="col-md-10">
+		    		<p class="form-control-static" th:text="${author.email}">keywords</p>
+		    	</div>
+		  	</div>
+		</form>
+		
+		<a th:href="@{/admin/authors/}">Back To Authors List</a>
+		<br/><br/><br/>
+		
+	</div>
+		
+</body>
+</layout:html>

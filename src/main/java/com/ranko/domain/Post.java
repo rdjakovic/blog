@@ -1,8 +1,13 @@
 package com.ranko.domain;
 
-import org.springframework.data.annotation.CreatedDate;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.ranko.json.JsonDateSerializer;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
@@ -13,31 +18,37 @@ public class Post {
     @GeneratedValue
     private Long id;
 
+    @NotEmpty
     private String title;
 
-    @Column(columnDefinition = "TEXT")
-    private String body;
-
-    @Column(columnDefinition = "TEXT")
-    private String teaser;
-
+    @NotEmpty
     private String slug;
 
-    @CreatedDate
+    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat ( pattern="d/MM/yyyy hh:mm:ss a")
     private Date postedOn;
 
+    @Size(min=1, max=2)
     @ElementCollection
     private List<String> keywords;
 
     private Boolean active;
 
+    @Column(columnDefinition = "TEXT")
+    private String teaser;
+
+    @NotEmpty
+    @Column(columnDefinition = "TEXT")
+    private String body;
+
+    @NotNull
     @ManyToOne
     private Author author;
 
-    // private no arg constructor is needed by JPA
-    @SuppressWarnings("unused")
-    private Post() {
+    public Post(){
+        this.postedOn = new Date();
+        this.active = true;
     }
 
     public Long getId() {
@@ -84,6 +95,7 @@ public class Post {
         this.slug = slug;
     }
 
+    @JsonSerialize(using=JsonDateSerializer.class)
     public Date getPostedOn() {
         return postedOn;
     }

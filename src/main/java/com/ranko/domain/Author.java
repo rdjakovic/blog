@@ -20,9 +20,9 @@ public class Author {
 //    @OneToMany(mappedBy = "author")
 //    List<Post> posts;
 
-    // private no arg constructor is needed by JPA
+    // no arg constructor is needed by JPA
     @SuppressWarnings("unused")
-    private Author() {
+    public Author() {
     }
 
     public Author(String firstName, String lastName) {
